@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ host }}"
+- hosts: localost, all
   remote_user: root
   environment:
     GOPATH: /usr/go
@@ -12,7 +12,7 @@
     - name: set up the system
       include: "setup.yml"
 
-- hosts: "{{ host }}"
+- hosts: localhost, all
   remote_user: root
   vars_files:
     - "{{ playbook_dir }}/vars.yml"
@@ -35,7 +35,7 @@
     - name: run k8s e2e tests
       include: "e2e.yml"
 
-- hosts: "{{ host }}"
+- hosts: localhost, all
   remote_user: root
   vars_files:
     - "{{ playbook_dir }}/vars.yml"

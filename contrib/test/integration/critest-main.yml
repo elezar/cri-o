@@ -1,5 +1,5 @@
 ---
-- hosts: "{{ host }}"
+- hosts: localhost, all
   remote_user: root
   environment:
     GOPATH: /usr/go
