@@ -5,6 +5,7 @@
     dest: "{{ ansible_env.GOPATH }}/src/github.com/cri-o/cri-o" 
     clone: yes 
     update: yes
+  when: JENKINS_URL == ""
 
 - name: stat the expected cri-o directory
   stat:
