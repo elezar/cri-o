@@ -86,7 +86,9 @@
     regexp: 'KUBECONFIG='
     state: present
 
-
+- name: reload systemd
+  sudo: yes
+  command: systemctl daemon-reload
 
 - name: install kubectl (for kubetest)
   copy:
