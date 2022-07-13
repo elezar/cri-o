@@ -86,10 +86,6 @@
     regexp: 'KUBECONFIG='
     state: present
 
-- name: reload systemd
-  sudo: yes
-  command: systemctl daemon-reload
-
 - name: install kubectl (for kubetest)
   copy:
     src: "{{ ansible_env.GOPATH }}/src/k8s.io/kubernetes/_output/bin/kubectl"
