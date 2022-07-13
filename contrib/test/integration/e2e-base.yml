@@ -51,8 +51,10 @@
 
 - name: wait for the cluster to be running
   # ref: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
-  ansible.builtin.shell: |
-    "{{ ansible_env.GOPATH }}/bin/kubectl get nodes -o jsonpath='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}' 2>&1 | grep 'Ready=True'"
+  ansible.builtin.shell:
+    cmd: "{{ ansible_env.GOPATH }}/bin/kubectl get nodes -o jsonpath='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}' 2>&1 | grep 'Ready=True'"
+    args:
+      executable: /bin/bash
   register: kube_poll
   until: kube_poll.rc == 0
   retries: 100
