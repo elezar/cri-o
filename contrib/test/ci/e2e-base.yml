@@ -53,6 +53,8 @@
   # ref: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
   ansible.builtin.shell:
     cmd: source /etc/environment && /usr/bin/kubectl get nodes -o jsonpath='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}' | grep 'Ready=True'
+  environment:
+    KUBECONFIG: /var/run/kubernetes/admin.kubeconfig
   register: kube_poll
   until: kube_poll.rc == 0
   retries: 100
